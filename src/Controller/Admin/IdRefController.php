@@ -23,7 +23,7 @@ class IdRefController extends AbstractActionController
         $trimmed_array = explode(' ', $trimmed);
 
         $query = implode(' AND ', $trimmed_array);
-        $query = "all: ($query*) AND recordtype_z:a";
+        $query = "persname_t: ($query*) AND recordtype_z:a";
 
         $client->setParameterGet(['q' => $query]);
         $json = json_decode($client->send()->getBody(), true);
