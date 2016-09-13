@@ -29,8 +29,8 @@ class IdRefController extends AbstractActionController
         $json = json_decode($client->send()->getBody(), true);
         $results = [];
 
-        foreach ($json[response][docs] as $d) {
-            array_push($results, $d[affcourt_z]);
+        foreach ($json['response']['docs'] as $d) {
+            array_push($results, $d['affcourt_z']);
         }
 
         return new JsonModel($results);
