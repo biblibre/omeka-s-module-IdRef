@@ -21,7 +21,7 @@ class IdRef extends AbstractDataType
 
     public function form(PhpRenderer $view)
     {
-        return $view->partial('common/data-type/literal');
+        return $view->partial('idref/data-type/idref');
     }
 
     public function isValid(array $valueObject)
@@ -38,11 +38,7 @@ class IdRef extends AbstractDataType
     public function hydrate(array $valueObject, Value $value, AbstractEntityAdapter $adapter)
     {
         $value->setValue($valueObject['@value']);
-        if (isset($valueObject['@language'])) {
-            $value->setLang($valueObject['@language']);
-        } else {
-            $value->setLang(null); // set default
-        }
+        $value->setLang(null); // set default
         $value->setUri(null); // set default
         $value->setValueResource(null); // set default
     }
@@ -55,9 +51,6 @@ class IdRef extends AbstractDataType
     public function getJsonLd(ValueRepresentation $value)
     {
         $jsonLd = ['@value' => $value->value()];
-        if ($value->lang()) {
-            $jsonLd['@language'] = $value->lang();
-        }
         return $jsonLd;
     }
 }
