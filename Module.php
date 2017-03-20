@@ -29,6 +29,7 @@
 
 namespace IdRef;
 
+use Zend\Mvc\MvcEvent;
 use Omeka\Module\AbstractModule;
 
 class Module extends AbstractModule
@@ -36,5 +37,15 @@ class Module extends AbstractModule
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
+    }
+
+    public function onBootstrap(MvcEvent $event)
+    {
+        parent::onBootstrap($event);
+
+        $services = $this->getServiceLocator();
+
+        $acl = $this->getServiceLocator()->get('Omeka\Acl');
+        $acl->allow(null, 'IdRef\Controller\Admin\IdRef', 'search');
     }
 }
