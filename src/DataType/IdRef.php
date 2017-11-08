@@ -51,6 +51,7 @@ class IdRef extends AbstractDataType
     public function getJsonLd(ValueRepresentation $value)
     {
         $jsonLd = ['@value' => $value->value()];
+
         return $jsonLd;
     }
 }
